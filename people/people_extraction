@@ -1,0 +1,46 @@
+import json
+import boto3
+import time
+import io
+from datetime import datetime
+import threading
+
+s3= boto3.client('s3')
+
+
+def detect_labels(bucket,photo):
+	rekognition = boto3.client("rekognition")
+	response = rekognition.detect_labels(Image={'S3Object':{'Bucket':bucket,'Name':photo}},MaxLabels=10)
+
+	return response['Labels']
+
+def lambda_handler(event, context):
+    now=datetime.now()
+
+    numberpeople=""
+
+    try:
+        for record in event['Records']:
+            filename = record['s3']['object']['key']
+            bucket = record['s3']['bucket']['name']
+            source= detect_labels(bucket,filename)
+            
+            for i in source:
+                if 'Person' in str(i):
+                    numberpeople+=str(len(i['Instances']))
+                    print(len(i['Instances']))
+                    break
+            else:
+                numberpeople=str(0)
+
+        realti=str(now.year)+str(now.month)+str(now.day)+str(now.hour)+str(now.minute)+str(now.second)    
+        realtitxt=realti+".txt"
+        with open('/tmp/'+realtitxt,'w') as f:
+            f.write(numberpeople)
+            
+        s3.upload_file('/tmp/'+realtitxt,'bucket_name',realtitxt)
+        print("업로드 완료")
+    except Exception as e:
+        print(e)
+    
+    return "Thanks"
