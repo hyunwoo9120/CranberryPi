@@ -15,7 +15,7 @@ def switch(x):
     return({11,12,1,2:'heat', 5,6,7,8:'cool'}.get(x,'default'))
 
 def check_temp():
-    it=subprocess.check_output(['python3','humidtest.py'])
+    it=subprocess.check_output(['python3','temperature.py'])
     threading.Timer(300,check_temp).start() '''5min'''
 
 def check_pn():
@@ -52,12 +52,15 @@ def main(month, init_temp):
         print('Start Cooling Control!')
         print('======================')
         while True:
+            sleep
             if(s==1 and (it<24 or pn==0)):
                 if(os.system(onoff) != 0): '''off'''
                     print('onoff error')
                     break
                 s=0
             else:    
+                if(it<=26): '''꺼져있을 때 는 처음상황에서는 26도 보다 크면 on'''
+                    continue                
                 if(s==0 and (it==24 and 20<pn)):
                     if(os.system(onoff) != 0): '''on'''
                         print('onoff error')
@@ -103,6 +106,8 @@ def main(month, init_temp):
                     break
                 s=0
             else:    
+                if(it>=18): '''꺼져있을 때 켜는 처음상황에서는 18도 보다 작으면 on'''
+                    continue
                 if(s==0 and (it==20 and pn<=10)):
                     if(os.system(onoff) != 0): '''on'''
                         print('onoff error')
