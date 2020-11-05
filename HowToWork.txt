@@ -1,0 +1,22 @@
+gpio pin 확인: sudo gpio readall
+온도: python3 temperature.py 로 실행
+
+ir receiver:	python irrp.py -r -g23 -fhome_aircon power
+ir transmitter:	python irrp.py -p -g22 -fhome_aircon power
+
+power on
+python irrp.py -p -g22 -fhome_aircon power
+
+power off
+python irrp.py -p -g22 -fhome_aircon power_off
+
+down
+python irrp.py -p -g22 -fhome_aircon downTemperature
+
+up
+python irrp.py -p -g22 -fhome_aircon upTemperature
+
+
+
+
+
