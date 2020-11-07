@@ -91,7 +91,7 @@ def main(month, init_temp):
         if(hour=='12' or hour=='17'):
           continue
         print_real()
-        time.slepp(3)
+        time.slep(3)
         pn=gpn()
         time.sleep(2)
         check_temp()
