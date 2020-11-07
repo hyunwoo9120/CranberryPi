@@ -91,7 +91,7 @@ def main(init_temp):
     while True:
         hour=check_hour()
         if(hour=='12' or hour=='17'): '''for lunchtime & closing hour'''
-          continue
+            continue
         print_real()
         time.slep(3)
         pn=gpn()
