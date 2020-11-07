@@ -134,7 +134,7 @@ def main(init_temp):
                     if(20<pn<=30):
                         '''set temp 24'''
                         set_temp(st,24)
-                elif(s==0 and (it>=26)):
+                elif(s==0 and (it>=26 and 0<pn)):
                     if(os.system(onoff) != 0): '''on'''
                         print('onoff error')
                         break
