@@ -120,7 +120,7 @@ def main(init_temp):
                     s=1
                     '''set temp 24'''
                     set_temp(st,24)
-                else if(s==0 and (it==25 and 10<pn)):
+                elif(s==0 and (it==25 and 10<pn)):
                     if(os.system(onoff) != 0): '''on'''
                         print('onoff error')
                         break
@@ -132,7 +132,7 @@ def main(init_temp):
                     if(20<pn<=30):
                         '''set temp 24'''
                         set_temp(st,24)
-                else if(s==0 and (it>=26)):
+                elif(s==0 and (it>=26)):
                     if(os.system(onoff) != 0): '''on'''
                         print('onoff error')
                         break
@@ -179,7 +179,7 @@ def main(init_temp):
                     s=1
                     '''set temp 20'''
                     set_temp(st,20)
-                else if(s==0 and (it==19 and pn<=20)):
+                elif(s==0 and (it==19 and pn<=20)):
                     if(os.system(onoff) != 0): '''on'''
                         print('onoff error')
                         break
@@ -191,7 +191,7 @@ def main(init_temp):
                     if(10<pn<=20):
                         '''set temp 19'''
                         set_temp(st,19)
-                else if(s==0 and (it<=18)):
+                elif(s==0 and (it<=18)):
                     if(os.system(onoff) != 0): '''on'''
                         print('onoff error')
                         break
