@@ -214,7 +214,7 @@ def main(init_temp):
         print("There's no need for cooling and heating!")
     
 if __name__=='__main__':
-    parser = argparse.ArgumentParser(description='control Air Conditioner')
+    parser = ArgumentParser(description='control Air Conditioner')
     parser.add_argument("--input_initial_temp",help=" ")
     args=parser.parse_args()
     input_initial_temp=args.input_initial_temp
