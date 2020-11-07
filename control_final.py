@@ -49,11 +49,13 @@ def gpn():
     return int(mystring) 
 
 def check_hour():
-  now = datetime.now()
-  return now.hour
-  
-def switch(x):
-    return({11,12,1,2:'heat', 5,6,7,8:'cool'}.get(x,'default'))
+    now = datetime.now()
+    return now.hour
+
+def check_month():
+    now = datetime.now()
+    month = int(now.month)
+    return({11,12,1,2:'heat', 5,6,7,8:'cool'}.get(month,'default'))
 
 def check_temp():
     _,it = dht.read_retry(dht.DHT11,14)
@@ -81,14 +83,14 @@ def set_temp(st,tmp):
 #sys : cool or heat
 '''starting off'''
 
-def main(month, init_temp):
-    sys=switch(month)
+def main(init_temp):
+    sys=check_month()
     s=0 #off
     st=init_temp 
     forBreak=False '''for error handle'''
     while True:
         hour=check_hour()
-        if(hour=='12' or hour=='17'):
+        if(hour=='12' or hour=='17'): '''for lunchtime & closing hour'''
           continue
         print_real()
         time.slep(3)
@@ -210,9 +212,7 @@ def main(month, init_temp):
     
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='control Air Conditioner')
-    parser.add_argument("--input_month",help=" ")
     parser.add_argument("--input_initial_temp",help=" ")
     args=parser.parse_args()
-    input_month=args.input_month
     input_initial_temp=args.input_initial_temp
-    main(month, input_initial_temp)
+    main(input_initial_temp)
