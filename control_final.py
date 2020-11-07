@@ -52,12 +52,13 @@ def check_month():
     now = datetime.now()
     month = int(now.month)
     if(month==11 or month==12
-        or month==1 or month==2)
+        or month==1 or month==2):
         return 'heat'
     if(month==5 or month==6
-        or month==7 or month==8)
+        or month==7 or month==8):
         return 'cool'
-    else return 'default'
+    else:
+        return 'default'
 
 def check_temp():
     _,it = dht.read_retry(dht.DHT11,14)
